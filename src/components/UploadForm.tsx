@@ -9,12 +9,13 @@ const UploadForm: React.FC = () => {
   const [_parsedA, setParsedA] = useState<any[] | null>(null);
   const [_parsedB, setParsedB] = useState<any[] | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const parseWithWorker = (file: File, onComplete: (data: any[]) => void) => {
     const worker = new CsvWorker();
 
     worker.onmessage = (e: MessageEvent) => {
-      console.log("data from worker", e);
+      // console.log("data from worker", e);
       if (e.isTrusted) {
         toast.success(`${file.name} parsed`);
         onComplete(e.data);
@@ -30,7 +31,7 @@ const UploadForm: React.FC = () => {
   const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
-    console.log("e", e);
+    // console.log("e", e);
 
     const files = Array.from(e.dataTransfer.files).filter(
       (file) => file.type === "text/csv"
@@ -59,18 +60,26 @@ const UploadForm: React.FC = () => {
     formData.append("fileB", fileB);
 
     try {
-      const res = await fetch("http://localhost:3000/reconcile", {
-        method: "POST",
-        body: formData,
-      });
+      setLoading(true);
+      // const res = await fetch("http://localhost:3000/reconcile", {
+      const res = await fetch(
+        "https://transaction-reconciliation-backend.onrender.com/reconcile",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!res.ok) throw new Error("Upload failed");
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
       localStorage.setItem("reconciliation", JSON.stringify(data));
       toast.success("Reconciliation complete!");
     } catch (err) {
+      setLoading(false);
       toast.error("Error uploading files.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -157,7 +166,7 @@ const UploadForm: React.FC = () => {
           onClick={handleUpload}
           className="bg-[#071B06] text-[#C6FAC4] px-8 py-2 rounded hover:bg-[#366536] cursor-pointer hover:text-white transition-all duration-500"
         >
-          Upload
+          {!loading ? "Upload" : "...loading"}
         </button>
       </div>
     </div>

@@ -13,7 +13,7 @@ export default function App() {
     <Router>
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 p-6">
+        <div className="w-full border p-6 bg-[#e4e4e4]">
           <Routes>
             <Route path="/" element={<Navigate to="/upload" replace />} />
             <Route path="/upload" element={<UploadForm />} />

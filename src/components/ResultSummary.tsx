@@ -80,8 +80,10 @@ const ResultSummary: React.FC = () => {
   if (!data) return <p>No data found. Please upload files first.</p>;
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Reconciliation Summary</h2>
+    <div className="">
+      <h2 className="text-2xl mt-5 mb-10  text-black font-bold">
+        Report Summary
+      </h2>
       <ReconciliationTabs data={formattedData} />
     </div>
   );

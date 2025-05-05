@@ -76,25 +76,12 @@ const UploadForm: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Upload CSV Files</h2>
-
-      {/* <div
-        onDragOver={(e) => {
-          e.preventDefault();
-          setIsDragging(true);
-        }}
-        onDragLeave={() => setIsDragging(false)}
-        onDrop={handleDrop}
-        className={`border-2 border-dashed rounded p-6 text-center ${
-          isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"
-        }`}
-      >
-        <p className="mb-2">Drag and drop two CSV files here</p>
-        <p className="text-sm text-gray-500">or select manually below</p>
-      </div> */}
+      <h2 className="text-2xl font-bold mt-5 mb-10 text-[#071B06]">
+        Upload CSV Files
+      </h2>
 
       <div
-        className={`w-full border-2 border-dashed rounded-lg p-6 transition-all text-center ${
+        className={`w-full max-w-[800px] m-auto h-[200px] flex items-center justify-center border-2 border-dashed rounded-lg p-6 transition-all text-center ${
           isDragging ? "border-blue-600 bg-blue-50" : "border-gray-300"
         }`}
         onDragOver={(e) => {
@@ -114,16 +101,16 @@ const UploadForm: React.FC = () => {
             </div>
           </div>
         ) : (
-          <>
+          <div className="flex flex-col items-center space-y-2">
             <p className="text-gray-500">
               Drag and drop <strong>two</strong> CSV files here
             </p>
             <p className="text-sm text-gray-500">or select manually below</p>
-          </>
+          </div>
         )}
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex text-[#071B06] gap-7 justify-center my-10">
         <input
           type="file"
           accept=".csv"
@@ -132,6 +119,7 @@ const UploadForm: React.FC = () => {
             setFileA(file);
             if (file) parseWithWorker(file, setParsedA);
           }}
+          className="cursor-pointer"
         />
         <input
           type="file"
@@ -141,15 +129,18 @@ const UploadForm: React.FC = () => {
             setFileB(file);
             if (file) parseWithWorker(file, setParsedB);
           }}
+          className="cursor-pointer"
         />
       </div>
 
-      <button
-        onClick={handleUpload}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Upload and Reconcile
-      </button>
+      <div className="">
+        <button
+          onClick={handleUpload}
+          className="bg-[#071B06] text-[#C6FAC4] px-8 py-2 rounded hover:bg-[#366536] cursor-pointer hover:text-white transition-all duration-500"
+        >
+          Upload
+        </button>
+      </div>
     </div>
   );
 };

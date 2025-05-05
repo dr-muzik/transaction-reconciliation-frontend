@@ -75,10 +75,29 @@ const UploadForm: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold mt-5 mb-10 text-[#071B06]">
-        Upload CSV Files
-      </h2>
+    <div className="space-y-4 h-screen">
+      <div className="flex justify-between flex-col md:flex-row">
+        <h2 className="text-2xl font-bold mt-5 mb-10 text-[#071B06]">
+          Upload CSV Files
+        </h2>
+        <div className="flex flex-col items-center">
+          <p className="text-lg font-bold text-[#071B06]">
+            Download CSV Sample
+          </p>
+          <div className="flex gap-4">
+            <button className="border border-[#071B06] rounded px-4 py-2 hover:bg-[#C6FAC4] hover:text-white transition-all duration-500">
+              <a href="/transactionA_m.csv" download className="text-[#071B06]">
+                CSV 1
+              </a>
+            </button>
+            <button className="border border-[#071B06] rounded px-4 py-2 hover:bg-[#C6FAC4] hover:text-white transition-all duration-500">
+              <a href="/transactionB_m.csv" download className="text-[#071B06]">
+                CSV 2
+              </a>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div
         className={`w-full max-w-[800px] m-auto h-[200px] flex items-center justify-center border-2 border-dashed rounded-lg p-6 transition-all text-center ${
@@ -110,7 +129,7 @@ const UploadForm: React.FC = () => {
         )}
       </div>
 
-      <div className="flex text-[#071B06] gap-7 justify-center my-10">
+      <div className="flex flex-col md:flex-row text-[#071B06] gap-7 justify-center my-10 ">
         <input
           type="file"
           accept=".csv"
@@ -119,7 +138,7 @@ const UploadForm: React.FC = () => {
             setFileA(file);
             if (file) parseWithWorker(file, setParsedA);
           }}
-          className="cursor-pointer"
+          className="cursor-pointer "
         />
         <input
           type="file"

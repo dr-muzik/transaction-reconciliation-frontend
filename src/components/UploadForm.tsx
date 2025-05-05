@@ -12,7 +12,7 @@ const UploadForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const parseWithWorker = (file: File, onComplete: (data: any[]) => void) => {
-    const toastId = toast.loading("Parsing in progress...");
+    const toastId = toast.loading("Parsing with web workers in progress...");
     const worker = new CsvWorker();
 
     worker.onmessage = (e: MessageEvent) => {

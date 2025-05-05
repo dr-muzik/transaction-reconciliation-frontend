@@ -12,10 +12,11 @@ const UploadForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const parseWithWorker = (file: File, onComplete: (data: any[]) => void) => {
+    const toastId = toast.loading("Parsing in progress...");
     const worker = new CsvWorker();
 
     worker.onmessage = (e: MessageEvent) => {
-      // console.log("data from worker", e);
+      toast.dismiss(toastId);
       if (e.isTrusted) {
         toast.success(`${file.name} parsed`);
         onComplete(e.data);
@@ -59,6 +60,7 @@ const UploadForm: React.FC = () => {
     formData.append("fileA", fileA);
     formData.append("fileB", fileB);
 
+    const toastId = toast.loading("sending data for processing...");
     try {
       setLoading(true);
       // const res = await fetch("http://localhost:3000/reconcile", {
@@ -80,6 +82,7 @@ const UploadForm: React.FC = () => {
       toast.error("Error uploading files.");
     } finally {
       setLoading(false);
+      toast.dismiss(toastId);
     }
   };
 

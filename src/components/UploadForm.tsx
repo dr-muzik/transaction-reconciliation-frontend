@@ -95,12 +95,12 @@ const UploadForm: React.FC = () => {
           </p>
           <div className="flex gap-4">
             <button className="border border-[#071B06] rounded px-4 py-2 hover:bg-[#C6FAC4] hover:text-white transition-all duration-500">
-              <a href="/transactionA_m.csv" download className="text-[#071B06]">
+              <a href="/transactionA.csv" download className="text-[#071B06]">
                 CSV 1
               </a>
             </button>
             <button className="border border-[#071B06] rounded px-4 py-2 hover:bg-[#C6FAC4] hover:text-white transition-all duration-500">
-              <a href="/transactionB_m.csv" download className="text-[#071B06]">
+              <a href="/transactionB.csv" download className="text-[#071B06]">
                 CSV 2
               </a>
             </button>
